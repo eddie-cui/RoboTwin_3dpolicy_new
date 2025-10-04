@@ -4,14 +4,61 @@
 
 2. To apply your policy, please refer to `test.py`. The specific implementation details are provided in the code comments.
 
+3. You can use ``get_observation`` function to get ovservations anytime to update your model.
+
+4. There are two version for action filter ``action_filter_multiprocess.py`` and ``action_filter.py`` in ``script`` folder. I recommand to use the first one because it's faster. 
+
 ---
-## To Do 
-* Action filter: Expected completion date: 10/3
+## Action Filtering
 
+To run the action filtering, the command is:
+```
+python action_filter_multiprocess.py --task_name move_pillbottle_pad --base_folder /data/sea_disk0/cuihz/RoboTwin/data/Right --threshold 5e-3 --time_window 2 --demo_config demo_clean --visualize --workers 100
+```
+or
+```
+python action_filter.py --task_name move_pillbottle_pad --base_folder /data/sea_disk0/cuihz/RoboTwin/data/Right --threshold 5e-3 --time_window 2 --demo_config demo_clean --visualize
+```
 
+``task_name`` should be one of the 50 tasks in RoboTwin.
 
+``base_folder`` Your base folder should be like that:
+```
+|-- move_pillbottle_pad
+|   `-- demo_clean
+|       |-- _traj_data
+|       |-- data
+|       |-- data_filtered
+|       |-- instructions
+|       |-- video
+|       `-- visualize_filtered
+|-- move_playingcard_away
+|   `-- demo_clean
+|       |-- _traj_data
+|       |-- data
+|       |-- data_filtered
+|       |-- instructions
+|       |-- video
+|       `-- visualize_filtered
+|-- move_stapler_pad
+|   `-- demo_clean
+|       |-- _traj_data
+|       |-- data
+|       |-- data_filtered
+|       |-- instructions
+|       |-- video
+|       `-- visualize_filtered
 
+```
+``threshold`` defines the L2 norm threshold for filtering robot actions based on movement magnitude. 
 
+``time_window`` Time windows where the maximum action change falls below this threshold will be excluded from the filtered dataset.
+
+``demo_config``: demo_clean/demo_randomized
+
+``visualize``: Save visualize video
+
+**The filtered data is saved in the `data_filtered` folder within each task directory, and visualization videos are generated in the `visualize_filtered` folder.**
 <h1 align="center">
   <a href="https://robotwin-benchmark.github.io"><b>RoboTwin</b> Bimanual Robotic Manipulation Platform<br></a>
 </h1>
