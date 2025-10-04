@@ -6,7 +6,7 @@
 
 3. You can use ``get_observation`` function to get ovservations anytime to update your model.
 
-4. There are two version for action filter ``action_filter_multiprocess.py`` and ``action_filter.py`` in ``script`` folder. I recommand to use the first one because it's faster. 
+4. There are two versions for action filter ``action_filter_multiprocess.py`` and ``action_filter.py`` in ``script`` folder. I recommend to use the first one because it's faster. 
 
 ---
 ## Action Filtering
